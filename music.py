@@ -2,7 +2,8 @@ from flask import Flask, request, jsonify, render_template
 import sqlite3
 import os
 from werkzeug.utils import secure_filename
-
+from spotipy import Spotify
+from spotipy.oauth2 import SpotifyClientCredentials
 app = Flask(__name__)
 
 # Create a SQLite database and a 'songs' table
@@ -19,18 +20,18 @@ cursor.execute('''
 ''')
 
 # Insert 10 songs into the 'songs' table
-songs_data = [
-    ("Queen", "Rock", "Bohemian Rhapsody"),
-    ("Michael Jackson", "Pop", "Thriller"),
-    ("Bob Marley", "Reggae", "No Woman, No Cry"),
-    ("The Beatles", "Rock", "Hey Jude"),
-    ("Beyoncé", "R&B", "Single Ladies"),
-    ("Elvis Presley", "Rock and Roll", "Jailhouse Rock"),
-    ("David Bowie", "Rock", "Space Oddity"),
-    ("Prince", "Funk", "Purple Rain"),
-    ("Johnny Cash", "Country", "Ring of Fire"),
-    ("Miles Davis", "Jazz", "So What"),
-]
+# songs_data = [
+#     ("Queen", "Rock", "Bohemian Rhapsody"),
+#     ("Michael Jackson", "Pop", "Thriller"),
+#     ("Bob Marley", "Reggae", "No Woman, No Cry"),
+#     ("The Beatles", "Rock", "Hey Jude"),
+#     ("Beyoncé", "R&B", "Single Ladies"),
+#     ("Elvis Presley", "Rock and Roll", "Jailhouse Rock"),
+#     ("David Bowie", "Rock", "Space Oddity"),
+#     ("Prince", "Funk", "Purple Rain"),
+#     ("Johnny Cash", "Country", "Ring of Fire"),
+#     ("Miles Davis", "Jazz", "So What"),
+# ]
 
 cursor.executemany('''
     INSERT INTO songs (artist, genre, title)
